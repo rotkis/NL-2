@@ -62,19 +62,81 @@ class N:
 class Emissao:
     def __init__(self):
         self.c = 3*(10**8)
-        self.mi = (4 * 3.14) * (10 ** -7)
-        self.cMagnetico = float(input("Digite o campo magnético (em T): "))
+        self.menu()
         print("\n--------------------------------------------------------------------------\n")
-        self.converterParaCampoEletrico()
-        self.converterParaIntesidade()
 
-    def converterParaCampoEletrico(self):
-        self.cEletrico = self.c * self.cMagnetico
-        print(f"Campo Elétrico: {self.cEletrico:.3e} V/m")  # Notação científica com 3 casas decimais
+    def menu(self):
+        self.c = 3*(10**8)
+        self.hev = 4.136e-15
+        self.hj = 6.626e-34
+        self.m = 9.11e-31
+        self.converterEvJ = 1.602e-9
+        print("\n--------------------------------------------------------------------------\n")
+        print("Selecione o que você tem: ")
+        classe = input("Digite de (0-6)\nNi e Frequência = 0 \nNi e Comprimento de onda = 1 \nNf e Frequência = 2 \nNf e Comprimento de onda = 3 \nNf e Ni = 4\n")
+        if classe == "0":
+                self.freq = float(input("Digite a frequência (em THz): "))
+                self.ni = int(input("Digite o n inicial: "))
+                self.emitConverterDeFreqeNi()
 
-    def converterParaIntesidade(self):
-        self.Intesidade = (self.c * (self.cMagnetico ** 2)) / (2 * self.mi)
-        print(f"Intensidade: {self.Intesidade:.3e} W/m²")  # Notação científica com 3 casas decimais
+        elif classe == "1":
+                self.conda = float(input("Digite o comprimento de onda (em nm): "))
+                self.ni = int(input("Digite o n inicial: "))
+                self.emitConverterDeCondaeNi()
+
+        elif classe == "2":
+                self.freq = float(input("Digite a frequência (em THz): "))
+                self.nf = int(input("Digite o n final: "))
+                self.emitConverterDeFreqeNf()
+
+        elif classe == "3":
+                self.conda = float(input("Digite o comprimento de onda (em nm): "))
+                self.nf = int(input("Digite o n final: "))
+                self.emitConverterDeCondaeNf()
+
+        elif classe == "4":
+                self.ni = int(input("Digite o n inicial: "))
+                self.nf = int(input("Digite o n final: "))
+                self.emitConverterParaEfoton()
+                self.emitConverterParaCondaf()
+                self.emitConverterParaFrequenciaf()
+            
+        
+    def emitConverterParaEfoton(self):
+        self.eFotonemit = (-13.6/(self.ni * self.ni))-(-13.6/(self.nf * self.nf))
+        print(f"Energia do fóton emitido: {self.eFotonemit:.2e} eV")  # Notação científica com 3 numeros significativos
+    
+    def emitConverterParaCondaf(self):
+        self.condafa = (self.hev * self.c) / self.eFotonemit
+        print(f"Comprimento de onda do fóton emitido: {self.condafa:.2e} m\t{1e9*self.condafa:.2e} nm")  # Notação científica com 3 numeros significativos
+
+    def emitConverterParaFrequenciaf(self):
+        self.frequenciafa =  self.eFotonemit / self.hev
+        print(f"Frequência do fóton emitido: {self.frequenciafa:.2e} Hz\t{1e-12*self.frequenciafa:.2e} THz")  # Notação científica com 3 numeros significativos
+
+    def emitConverterDeFreqeNf(self):
+        self.eFoton = self.hev * (self.freq * 1e12)
+        self.eInicial = self.eFoton + (-13.6/(self.nf * self.nf))
+        self.ni = sqrt((-13.6)/self.eInicial)
+        print(f"N inicial: {self.ni:.2e}")  # Notação científica com 3 numeros significativos
+    
+    def emitConverterDeCondaeNf(self):
+        self.eFoton = (self.hev * self.c) / (self.conda / 1e9)
+        self.eInicial = self.eFoton + (-13.6/(self.nf * self.nf))
+        self.ni = sqrt((-13.6)/self.eInicial)
+        print(f"N inicial: {self.ni:.2e}")  # Notação científica com 3 numeros significativos
+
+    def emitConverterDeFreqeNi(self):
+        self.eFoton = self.hev * (self.freq * 1e12)
+        self.eFinal = (-13.6/(self.ni * self.ni)) - self.eFoton
+        self.nf = sqrt((-13.6)/self.eFinal)
+        print(f"N final: {self.nf:.2e}")  # Notação científica com 3 numeros significativos
+    
+    def emitConverterDeCondaeNi(self):
+        self.eFoton = (self.hev * self.c) / (self.conda / 1e9)
+        self.eFinal = (-13.6/(self.ni * self.ni)) - self.eFoton
+        self.nf = sqrt((-13.6)/self.eFinal)
+        print(f"N final: {self.nf:.2e}")  # Notação científica com 3 numeros significativos
 
 class Absorcao:
     def __init__(self):
@@ -94,34 +156,67 @@ class Absorcao:
         print("Selecione o que você tem: ")
         classe = input("Digite de (0-6)\nNi e Frequência = 0 \nNi e Comprimento de onda = 1 \nNf e Frequência = 2 \nNf e Comprimento de onda = 3 \nNf e Ni = 4\n")
         if classe == "0":
-                pass
+                self.freq = float(input("Digite a frequência (em THz): "))
+                self.ni = int(input("Digite o n inicial: "))
+                self.absConverterDeFreqeNi()
+
         elif classe == "1":
-                Emissao()
+                self.conda = float(input("Digite o comprimento de onda (em nm): "))
+                self.ni = int(input("Digite o n inicial: "))
+                self.absConverterDeCondaeNi()
+                
         elif classe == "2":
-                Absorcao()
+                self.freq = float(input("Digite a frequência (em THz): "))
+                self.nf = int(input("Digite o n final: "))
+                self.absConverterDeFreqeNf()
+
         elif classe == "3":
-                Fotons()
+                self.conda = float(input("Digite o comprimento de onda (em nm): "))
+                self.nf = int(input("Digite o n final: "))
+                self.absConverterDeCondaeNf()
+
         elif classe == "4":
                 self.ni = int(input("Digite o n inicial: "))
                 self.nf = int(input("Digite o n final: "))
-                self.converterParaEfoton()
-                self.converterParaCondafa()
-                self.converterParafrequenciafa()
-            
-        
+                self.absConverterParaEfoton()
+                self.absConverterParaCondafa()
+                self.absConverterParaFrequenciafa()
 
-    def converterParaEfoton(self):
+    def absConverterParaEfoton(self):
         self.eFoton = (-13.6/(self.nf * self.nf))-(-13.6/(self.ni * self.ni))
-        print(f"Energia do foton: {self.eFoton:.2e} eV")  # Notação científica com 3 numeros significativos
+        print(f"Energia do fóton absorvido: {self.eFoton:.2e} eV")  # Notação científica com 3 numeros significativos
     
-    def converterParaCondafa(self):
+    def absConverterParaCondafa(self):
         self.condafa = (self.hev * self.c) / self.eFoton
-        print(f"Comprimento de onda do foton absorvido: {self.condafa:.2e} m\t{1e9*self.condafa:.2e} nm")  # Notação científica com 3 numeros significativos
+        print(f"Comprimento de onda do fóton absorvido: {self.condafa:.2e} m\t{1e9*self.condafa:.2e} nm")  # Notação científica com 3 numeros significativos
 
-    def converterParafrequenciafa(self):
+    def absConverterParaFrequenciafa(self):
         self.frequenciafa =  self.eFoton / self.hev
-        print(f"frequência do foton absorvido: {self.frequenciafa:.2e} Hz\t{1e-12*self.frequenciafa:.2e} THz")  # Notação científica com 3 numeros significativos
+        print(f"Frequência do fóton absorvido: {self.frequenciafa:.2e} Hz\t{1e-12*self.frequenciafa:.2e} THz")  # Notação científica com 3 numeros significativos
 
+    def absConverterDeFreqeNi(self):
+        self.eAbs = self.hev * (self.freq * 1e12)
+        self.eFinal = (-13.6/(self.ni * self.ni)) + self.eAbs
+        self.nf = sqrt((-13.6)/self.eFinal)
+        print(f"N final: {self.nf:.2e}")  # Notação científica com 3 numeros significativos
+    
+    def absConverterDeCondaeNi(self):
+        self.eAbs = (self.hev * self.c) / (self.conda / 1e9)
+        self.eFinal = (-13.6/(self.ni * self.ni)) + self.eAbs
+        self.nf = sqrt((-13.6)/self.eFinal)
+        print(f"N final: {self.nf:.2e}")  # Notação científica com 3 numeros significativos
+    
+    def absConverterDeFreqeNf(self):
+        self.eAbs = self.hev * (self.freq * 1e12)
+        self.eInicial = (-13.6/(self.nf * self.nf)) - self.eAbs
+        self.ni = sqrt((-13.6)/self.eInicial)
+        print(f"N inicial: {self.ni:.2e}")  # Notação científica com 3 numeros significativos
+    
+    def absConverterDeCondaeNf(self):
+        self.eAbs = (self.hev * self.c) / (self.conda / 1e9)
+        self.eInicial = (-13.6/(self.nf * self.nf)) - self.eAbs
+        self.ni = sqrt((-13.6)/self.eInicial)
+        print(f"N inicial: {self.ni:.2e}")  # Notação científica com 3 numeros significativos
 
 
 class Fotons:
