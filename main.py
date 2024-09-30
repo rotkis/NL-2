@@ -289,7 +289,7 @@ class Fotons:
 
 if __name__ == '__main__':
     print("Autores: Aline Rocha de Jesus, Arthur Carvalho Rotkis, Bianca Silva Oliveira")
-    print("O objetivo deste projeto é demonstrar, por meio de um código Python, as ondas eletromagnéticas,\nque são ondas capazes de propagar no vácuo e de se formarem pela combinação entre os campos elétricos e magnéticos,\nque são responsáveis pela onda de rádio, micro-ondas, infravermelho, luz visível, raios ultravioletas, raio X e raios gama.\nAlém disso, as ondas eletromagnéticas são classificadas de acordo com a frequência, oscilação e comprimento de onda, que também são representados dentro do código.")
+    print("O objetivo deste projeto é demonstrar, por meio de um código Python,o modelo de Bohr para o átomo de hidrogênio.\nEste propôs que os elétrons movem-se em órbitas quantizadas com energias discretas, determinadas pelo momento angular quantizado,\nfazendo com que energia seja emitida ou absorvida na forma de fótons quando o elétron passa a mudar de órbita.\nEssa quantização de energia foi essencial para explicar os espectros atômicos.")
     
     app = Main()
 
