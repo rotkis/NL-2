@@ -19,6 +19,7 @@ class Main:
 
 # ev para joule = *
 # Joule para ev = /
+
 class N:
     def __init__(self):
         self.c = 3*(10**8)
@@ -118,25 +119,25 @@ class Emissao:
         self.eFoton = self.hev * (self.freq * 1e12)
         self.eInicial = self.eFoton + (-13.6/(self.nf * self.nf))
         self.ni = sqrt((-13.6)/self.eInicial)
-        print(f"N inicial: {self.ni:.2e}")  # Notação científica com 3 numeros significativos
+        print(f"N inicial: {self.ni:.2e}\t ou \t {round(self.ni)}")  # Notação científica com 3 numeros significativos
     
     def emitConverterDeCondaeNf(self):
         self.eFoton = (self.hev * self.c) / (self.conda / 1e9)
         self.eInicial = self.eFoton + (-13.6/(self.nf * self.nf))
         self.ni = sqrt((-13.6)/self.eInicial)
-        print(f"N inicial: {self.ni:.2e}")  # Notação científica com 3 numeros significativos
+        print(f"N inicial: {self.ni:.2e} \t ou \t {round(self.ni)}")  # Notação científica com 3 numeros significativos
 
     def emitConverterDeFreqeNi(self):
         self.eFoton = self.hev * (self.freq * 1e12)
         self.eFinal = (-13.6/(self.ni * self.ni)) - self.eFoton
         self.nf = sqrt((-13.6)/self.eFinal)
-        print(f"N final: {self.nf:.2e}")  # Notação científica com 3 numeros significativos
+        print(f"N final: {self.nf:.2e} \t ou \t {round(self.nf)}")  # Notação científica com 3 numeros significativos
     
     def emitConverterDeCondaeNi(self):
         self.eFoton = (self.hev * self.c) / (self.conda / 1e9)
         self.eFinal = (-13.6/(self.ni * self.ni)) - self.eFoton
         self.nf = sqrt((-13.6)/self.eFinal)
-        print(f"N final: {self.nf:.2e}")  # Notação científica com 3 numeros significativos
+        print(f"N final: {self.nf:.2e} \t ou \t {round(self.nf)}")  # Notação científica com 3 numeros significativos
 
 class Absorcao:
     def __init__(self):
@@ -198,25 +199,25 @@ class Absorcao:
         self.eAbs = self.hev * (self.freq * 1e12)
         self.eFinal = (-13.6/(self.ni * self.ni)) + self.eAbs
         self.nf = sqrt((-13.6)/self.eFinal)
-        print(f"N final: {self.nf:.2e}")  # Notação científica com 3 numeros significativos
+        print(f"N final: {self.nf:.2e} \t ou \t {round(self.nf)}")  # Notação científica com 3 numeros significativos
     
     def absConverterDeCondaeNi(self):
         self.eAbs = (self.hev * self.c) / (self.conda / 1e9)
         self.eFinal = (-13.6/(self.ni * self.ni)) + self.eAbs
         self.nf = sqrt((-13.6)/self.eFinal)
-        print(f"N final: {self.nf:.2e}")  # Notação científica com 3 numeros significativos
+        print(f"N final: {self.nf:.2e} \t ou \t {round(self.nf)}")  # Notação científica com 3 numeros significativos
     
     def absConverterDeFreqeNf(self):
         self.eAbs = self.hev * (self.freq * 1e12)
         self.eInicial = (-13.6/(self.nf * self.nf)) - self.eAbs
         self.ni = sqrt((-13.6)/self.eInicial)
-        print(f"N inicial: {self.ni:.2e}")  # Notação científica com 3 numeros significativos
+        print(f"N inicial: {self.ni:.2e} \t ou \t {round(self.ni)}")  # Notação científica com 3 numeros significativos
     
     def absConverterDeCondaeNf(self):
         self.eAbs = (self.hev * self.c) / (self.conda / 1e9)
         self.eInicial = (-13.6/(self.nf * self.nf)) - self.eAbs
         self.ni = sqrt((-13.6)/self.eInicial)
-        print(f"N inicial: {self.ni:.2e}")  # Notação científica com 3 numeros significativos
+        print(f"N inicial: {self.ni:.2e} \t ou \t {round(self.ni)}")  # Notação científica com 3 numeros significativos
 
 
 class Fotons:
@@ -288,8 +289,7 @@ class Fotons:
         
 
 if __name__ == '__main__':
-    print("Autores: Aline Rocha de Jesus, Arthur Carvalho Rotkis, Bianca Silva Oliveira")
-    print("O objetivo deste projeto é demonstrar, por meio de um código Python, as ondas eletromagnéticas,\nque são ondas capazes de propagar no vácuo e de se formarem pela combinação entre os campos elétricos e magnéticos,\nque são responsáveis pela onda de rádio, micro-ondas, infravermelho, luz visível, raios ultravioletas, raio X e raios gama.\nAlém disso, as ondas eletromagnéticas são classificadas de acordo com a frequência, oscilação e comprimento de onda, que também são representados dentro do código.")
+    print("\nAutores: Aline Rocha de Jesus, Arthur Carvalho Rotkis, Bianca Silva Oliveira")
+    print("O objetivo deste projeto é demonstrar, por meio de um código Python, o modelo de Bohr para o átomo de hidrogênio.\nEste propôs que os elétrons movem-se em órbitas quantizadas com energias discretas, determinadas pelo momento angular quantizado,\nfazendo com que energia seja emitida ou absorvida na forma de fótons quando o elétron passa a mudar de órbita.\nEssa quantização de energia foi essencial para explicar os espectros atômicos.")
     
     app = Main()
-
